@@ -57,7 +57,7 @@ namespace BigTed
 		public void SetOSSpecificLookAndFeel ()
 		{
 
-			if (IsiOS7)
+			if (isWhiteTheme)
 			{
 				HudBackgroundColour = UIColor.White.ColorWithAlpha (0.8f);
 				HudForegroundColor = UIColor.FromWhiteAlpha (0.0f, 0.8f);
@@ -159,7 +159,7 @@ namespace BigTed
 		{
 			get
 			{
-				return (IsiOS7 ? UIImage.FromBundle ("error_7.png") : UIImage.FromBundle ("error.png"));
+				return (isWhiteTheme ? UIImage.FromBundle ("error_7.png") : UIImage.FromBundle ("error.png"));
 			}
 		}
 
@@ -167,7 +167,7 @@ namespace BigTed
 		{
 			get
 			{
-				return (IsiOS7 ? UIImage.FromBundle ("success_7.png") : UIImage.FromBundle ("success.png"));
+				return (isWhiteTheme ? UIImage.FromBundle ("success_7.png") : UIImage.FromBundle ("success.png"));
 			}
 		}
 
@@ -585,7 +585,7 @@ namespace BigTed
 			{
 				if (_hudView == null)
 				{
-					if (IsiOS7)
+                    if (IsiOS7)
 					{
 						_hudView = new UIToolbar ();
 						(_hudView as UIToolbar).Translucent = true;
@@ -620,7 +620,7 @@ namespace BigTed
 					_stringLabel.BaselineAdjustment = UIBaselineAdjustment.AlignCenters;
 					_stringLabel.TextColor = HudForegroundColor;
 					_stringLabel.Font = HudFont;
-					if (!IsiOS7)
+					if (!isWhiteTheme)
 					{
 						_stringLabel.ShadowColor = HudStatusShadowColor;
 						_stringLabel.ShadowOffset = new CGSize (0, -1);
@@ -760,7 +760,7 @@ namespace BigTed
 						UnRegisterNotifications ();
 						NSNotificationCenter.DefaultCenter.RemoveObserver (this);
 
-						Ring.ResetStyle (IsiOS7, (IsiOS7 ? TintColor : UIColor.White));
+						Ring.ResetStyle (isWhiteTheme, (IsiOS7 ? TintColor : UIColor.White));
 
 						CancelRingLayerAnimation ();
 						StringLabel.RemoveFromSuperview ();
@@ -780,7 +780,7 @@ namespace BigTed
 						OverlayView = null;
 						this.RemoveFromSuperview ();
 
-						if (IsiOS7)
+                        if (IsiOS7)
 						{
 							var rootController = UIApplication.SharedApplication.KeyWindow.RootViewController;
 							if (rootController != null)
@@ -880,7 +880,7 @@ namespace BigTed
 				activeHeight += statusBarFrame.Size.Height * 2;
 			
 			activeHeight -= keyboardHeight;
-			nfloat posY = (float)Math.Floor (activeHeight * 0.45);
+			nfloat posY = (float)Math.Floor (activeHeight * 0.5);
 			nfloat posX = orientationFrame.Size.Width / 2;
 			nfloat textHeight = _stringLabel.Frame.Height / 2 + 40;
 
@@ -1100,27 +1100,26 @@ namespace BigTed
 			return (orientation == UIInterfaceOrientation.Portrait || orientation == UIInterfaceOrientation.PortraitUpsideDown);
 		}
 
-		public bool IsiOS7
+        public bool IsiOS7
+        {
+            get
+            {
+                return UIDevice.CurrentDevice.CheckSystemVersion (7, 0);
+            }
+        }
+
+        bool isWhiteTheme = true;
+		public bool IsWhiteTheme
 		{
 			get
 			{
-				if (ForceiOS6LookAndFeel)
-					return false;
-
-				return UIDevice.CurrentDevice.CheckSystemVersion (7, 0);
+                return isWhiteTheme;
 			}
-		}
-
-		bool forceiOS6LookAndFeel = false;
-
-		public bool ForceiOS6LookAndFeel
-		{
-			get { return forceiOS6LookAndFeel; }
-			set
-			{
-				forceiOS6LookAndFeel = value;
-				SetOSSpecificLookAndFeel ();
-			}
+            set
+            {
+                isWhiteTheme = value;
+                SetOSSpecificLookAndFeel ();
+            }
 		}
 	}
 }

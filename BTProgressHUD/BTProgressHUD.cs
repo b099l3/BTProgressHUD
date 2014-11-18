@@ -73,15 +73,15 @@ namespace BigTed
 			}
 		}
 
-		public static bool ForceiOS6LookAndFeel
+		public static bool IsWhiteTheme
 		{
 			get
 			{
-				return ProgressHUD.Shared.ForceiOS6LookAndFeel;
+                return ProgressHUD.Shared.IsWhiteTheme;
 			}
 			set
 			{
-				ProgressHUD.Shared.ForceiOS6LookAndFeel = value;
+                ProgressHUD.Shared.IsWhiteTheme = value;
 			}
 		}
 	}

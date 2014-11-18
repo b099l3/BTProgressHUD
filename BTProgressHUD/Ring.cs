@@ -23,10 +23,10 @@ namespace BigTed
 		/// </summary>
 		public Double ProgressUpdateInterval = 300;
 
-		public void ResetStyle(bool isiOS7, UIColor colorToUse)
+		public void ResetStyle(bool isWhiteTheme, UIColor colorToUse)
 		{
 			Color = colorToUse;
-			BackgroundColor = isiOS7 ? UIColor.White : UIColor.DarkGray;
+			BackgroundColor = isWhiteTheme ? UIColor.White : UIColor.DarkGray;
 			ProgressUpdateInterval = 300;
 
 
