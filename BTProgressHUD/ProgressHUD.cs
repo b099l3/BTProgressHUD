@@ -134,9 +134,9 @@ namespace BigTed
 			obj.InvokeOnMainThread (() => SetStatusWorker (status));
 		}
 
-		public void ShowSuccessWithStatus (string status, double timeoutMs = 1000)
+        public void ShowSuccessWithStatus (string status, double timeoutMs = 1000, MaskType maskType = MaskType.None)
 		{
-			ShowImage (SuccessImage, status, timeoutMs);
+			ShowImage (SuccessImage, status, timeoutMs, maskType);
 		}
 
 		public void ShowErrorWithStatus (string status, double timeoutMs = 1000)
@@ -144,15 +144,15 @@ namespace BigTed
 			ShowImage (ErrorImage, status, timeoutMs);
 		}
 
-		public void ShowImage (UIImage image, string status, double timeoutMs = 1000)
+        public void ShowImage (UIImage image, string status, double timeoutMs = 1000, MaskType maskType = MaskType.None)
 		{
 			
-			obj.InvokeOnMainThread (() => ShowImageWorker (image, status, TimeSpan.FromMilliseconds (timeoutMs)));
+			obj.InvokeOnMainThread (() => ShowImageWorker (image, status, TimeSpan.FromMilliseconds (timeoutMs), maskType));
 		}
 
 		public void Dismiss ()
 		{
-			obj.InvokeOnMainThread (DismissWorker);
+			obj.InvokeOnMainThread (DismissWorker); 
 		}
 
 		public UIImage ErrorImage
@@ -379,7 +379,7 @@ namespace BigTed
 			}
 		}
 
-		void ShowImageWorker (UIImage image, string status, TimeSpan duration)
+		void ShowImageWorker (UIImage image, string status, TimeSpan duration, MaskType maskType = MaskType.None)
 		{
 
 			_progress = -1;
@@ -394,7 +394,7 @@ namespace BigTed
 			}
 
 			if (!IsVisible)
-				Show ();
+                Show (maskType:maskType);
 
 			ImageView.Image = image;
 			ImageView.Hidden = false;
@@ -1108,7 +1108,7 @@ namespace BigTed
             }
         }
 
-        bool isWhiteTheme = true;
+        bool isWhiteTheme = false;
 		public bool IsWhiteTheme
 		{
 			get

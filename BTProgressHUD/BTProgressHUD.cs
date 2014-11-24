@@ -45,9 +45,9 @@ namespace BigTed
 			ProgressHUD.Shared.SetStatus(status);
 		}
 
-		public static void ShowSuccessWithStatus(string status, double timeoutMs = 1000)
+        public static void ShowSuccessWithStatus(string status, double timeoutMs = 1000, ProgressHUD.MaskType maskType = ProgressHUD.MaskType.None)
 		{
-			ProgressHUD.Shared.ShowSuccessWithStatus(status, timeoutMs);
+            ProgressHUD.Shared.ShowSuccessWithStatus(status, timeoutMs, maskType);
 		}
 
 		public static void ShowErrorWithStatus(string status, double timeoutMs = 1000)
