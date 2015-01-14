@@ -3,7 +3,7 @@ using System;
 #if __UNIFIED__
 using UIKit;
 #else
-using MonoTouch.UIKit;
+using UIKit;
 #endif
 
 namespace BigTed

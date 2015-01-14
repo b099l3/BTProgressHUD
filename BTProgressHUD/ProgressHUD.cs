@@ -23,16 +23,16 @@ using CoreAnimation;
 using CoreGraphics;
 
 #else
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using UIKit;
+using Foundation;
+using CoreAnimation;
+using CoreGraphics;
 
 using nfloat = System.Single;
-using System.Drawing;
-using CGRect = global::System.Drawing.RectangleF;
-using CGPoint = global::System.Drawing.PointF;
-using CGSize = global::System.Drawing.SizeF;
+using CoreGraphics;
+using CGRect = global::CGRect;
+using CGPoint = global::CGPoint;
+using CGSize = global::CGSize;
 #endif
 
 namespace BigTed

@@ -8,8 +8,8 @@ using System.Text;
 using Foundation;
 using UIKit;
 #else
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 #endif
 
 namespace BigTed
